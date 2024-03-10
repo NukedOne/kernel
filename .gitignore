@@ -1,0 +1,4 @@
+*.o
+boot.iso
+boot.bin
+.vscode/
