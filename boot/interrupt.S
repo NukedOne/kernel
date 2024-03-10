@@ -1,7 +1,6 @@
 #define ENTRY(name) .global name; .type name, @function
 #define END(name) .size name, . - name
 
-
 .section text
 .macro pushal
     pushl %eax
