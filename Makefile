@@ -1,5 +1,7 @@
 all: boot.iso
 
+CC = crossgcc
+
 boot.iso: boot/boot.bin
 	mkisofs \
 		-o $@ -b boot/grub/stage2_eltorito \

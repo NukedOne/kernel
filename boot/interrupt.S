@@ -4,23 +4,23 @@
 
 .section text
 .macro pushal
-    push %eax
-    push %ebx
-    push %ecx
-    push %edx
-    push %edi
-    push %esi
-    push %ebp
+    pushl %eax
+    pushl %ebx
+    pushl %ecx
+    pushl %edx
+    pushl %edi
+    pushl %esi
+    pushl %ebp
 .endm
 
 .macro popal
-    pop %ebp
-    pop %esi
-    pop %edi
-    pop %edx
-    pop %ecx
-    pop %ebx
-    pop %eax
+    popl %ebp
+    popl %esi
+    popl %edi
+    popl %edx
+    popl %ecx
+    popl %ebx
+    popl %eax
 .endm
 
 .macro ISR_NOERRCODE n
@@ -45,13 +45,16 @@ END(isr\n)
 ENTRY(interrupt_common)
 interrupt_common:
     pushal
-    
+
     cld
 
+    pushl %esp
     call dispatch_interrupt
+    add $4, %esp
 
     popal
-    add $4, %esp
+
+    add $8, %esp
 
     iretl
 END(interrupt_common)
