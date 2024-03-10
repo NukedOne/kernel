@@ -44,9 +44,15 @@ END(isr\n)
 
 ENTRY(interrupt_common)
 interrupt_common:
-    cld
     pushal
+    
+    cld
+
     call dispatch_interrupt
+
+    popal
+    add $4, %esp
+
     iretl
 END(interrupt_common)
 
