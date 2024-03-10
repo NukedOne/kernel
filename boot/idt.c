@@ -21,9 +21,38 @@ void idt_reserve_vector(uint8_t index, void (*handler)()) {
 }
 
 void idt_init() {
-    int i;
-    for (i = 0; i < 256; i++)
-        idt_reserve_vector(i, generic_isr);
+    idt_reserve_vector(0, isr0);
+    idt_reserve_vector(1, isr1);
+    idt_reserve_vector(2, isr2);
+    idt_reserve_vector(3, isr3);
+    idt_reserve_vector(4, isr4);
+    idt_reserve_vector(5, isr5);
+    idt_reserve_vector(6, isr6);
+    idt_reserve_vector(7, isr7);
+    idt_reserve_vector(8, isr8);
+    idt_reserve_vector(9, isr9);
+    idt_reserve_vector(10, isr10);
+    idt_reserve_vector(11, isr11);
+    idt_reserve_vector(12, isr12);
+    idt_reserve_vector(13, isr13);
+    idt_reserve_vector(14, isr14);
+    idt_reserve_vector(15, isr15);
+    idt_reserve_vector(16, isr16);
+    idt_reserve_vector(17, isr17);
+    idt_reserve_vector(18, isr18);
+    idt_reserve_vector(19, isr19);
+    idt_reserve_vector(20, isr20);
+    idt_reserve_vector(21, isr21);
+    idt_reserve_vector(22, isr22);
+    idt_reserve_vector(23, isr23);
+    idt_reserve_vector(24, isr24);
+    idt_reserve_vector(25, isr25);
+    idt_reserve_vector(26, isr26);
+    idt_reserve_vector(27, isr27);
+    idt_reserve_vector(28, isr28);
+    idt_reserve_vector(29, isr29);
+    idt_reserve_vector(30, isr30);
+    idt_reserve_vector(31, isr31);
 
     idt_load(sizeof(idt_entries) - 1, &idt_entries);
 }
