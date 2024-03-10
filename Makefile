@@ -25,7 +25,7 @@ boot/%.o: boot/%.c
 	$(CC) -c $^ -o $@ -m32 $(CFLAGS)
 
 boot/%.o: boot/%.S
-	$(AS) $^ -o $@ --32
+	$(CC) -c $^ -o $@ -m32
 
 clean:
 	$(RM) boot.iso boot/boot.bin boot/*.o

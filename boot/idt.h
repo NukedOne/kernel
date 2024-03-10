@@ -1,6 +1,8 @@
 #ifndef BOOT_IDT_H
 #define BOOT_IDT_H
 
+#include "regs.h"
+
 #define TOTAL_INTERRUPTS 256
 
 #include <stdint.h>
@@ -23,6 +25,8 @@ void idt_init();
 void idt_flush(uintptr_t idt_ptr);
 
 void generic_isr(const char *s);
+
+void dispatch_interrupt(struct registers *regs);
 
 void isr0(void);
 void isr1(void);

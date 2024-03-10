@@ -63,3 +63,7 @@ void idt_load(uint16_t limit, uintptr_t base) {
 
     idt_flush((uintptr_t)&idt_ptr);
 }
+
+void dispatch_interrupt(struct registers *regs) {
+    printf("int_no: %d\n", regs->int_no);
+}
