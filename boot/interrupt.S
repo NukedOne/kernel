@@ -1,25 +1,26 @@
 #define ENTRY(name) .global name; .type name, @function
 #define END(name) .size name, . - name
 
-.section text
+.section .text
+
 .macro pushal
-    pushl %eax
-    pushl %ebx
-    pushl %ecx
-    pushl %edx
-    pushl %edi
-    pushl %esi
-    pushl %ebp
+    push %eax
+    push %ebx
+    push %ecx
+    push %edx
+    push %edi
+    push %esi
+    push %ebp
 .endm
 
 .macro popal
-    popl %ebp
-    popl %esi
-    popl %edi
-    popl %edx
-    popl %ecx
-    popl %ebx
-    popl %eax
+    pop %ebp
+    pop %esi
+    pop %edi
+    pop %edx
+    pop %ecx
+    pop %ebx
+    pop %eax
 .endm
 
 .macro ISR_NOERRCODE n
@@ -30,6 +31,11 @@ isr\n:
     push $\n
     jmp interrupt_common
 END(isr\n)
+
+.pushsection .rodata.isr_table
+.long isr\n
+.popsection
+
 .endm
 
 .macro ISR_ERRCODE n
@@ -39,15 +45,23 @@ isr\n:
     push $\n
     jmp interrupt_common
 END(isr\n)
+
+.pushsection .rodata.isr_table
+.long isr\n
+.popsection
+
 .endm
 
+.pushsection .text.x86_entry
+.align 64
 ENTRY(interrupt_common)
 interrupt_common:
     pushal
 
     cld
 
-    pushl %esp
+    push %esp
+
     call dispatch_interrupt
     add $4, %esp
 
@@ -57,6 +71,13 @@ interrupt_common:
 
     iretl
 END(interrupt_common)
+
+.pushsection .rodata.isr_table
+.balign 8
+.global x86_isr_table
+.type x86_isr_table, STT_OBJECT
+x86_isr_table:
+.popsection
 
 ISR_NOERRCODE 0
 ISR_NOERRCODE 1
@@ -90,3 +111,10 @@ ISR_NOERRCODE 28
 ISR_NOERRCODE 29
 ISR_NOERRCODE 30
 ISR_NOERRCODE 31
+
+.popsection
+
+.pushsection .rodata.isr_table
+.global x86_isr_table_end
+x86_isr_table_end:
+.popsection
