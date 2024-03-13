@@ -4,22 +4,17 @@
 #include "idt.h"
 #include "print.h"
 
-
-void __attribute__((noreturn)) main(struct multiboot_info *mb) {
+void __attribute__((noreturn)) boot_main(struct multiboot_info *mb)
+{
     printf("bootloader: init\n");
 
-    gdt_load(sizeof(gdt) - 1, &gdt);
+    gdt_init();
     printf("gdt: init\n");
 
     idt_init();
     printf("idt: init\n");
 
     asm (
-        "sti"
-    );
-
-    asm (
         "hlt"
     );
-
 }

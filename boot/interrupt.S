@@ -31,11 +31,6 @@ isr\n:
     push $\n
     jmp interrupt_common
 END(isr\n)
-
-.pushsection .rodata.isr_table
-.long isr\n
-.popsection
-
 .endm
 
 .macro ISR_ERRCODE n
@@ -45,14 +40,8 @@ isr\n:
     push $\n
     jmp interrupt_common
 END(isr\n)
-
-.pushsection .rodata.isr_table
-.long isr\n
-.popsection
-
 .endm
 
-.pushsection .text.x86_entry
 .align 64
 ENTRY(interrupt_common)
 interrupt_common:
@@ -71,13 +60,6 @@ interrupt_common:
 
     iretl
 END(interrupt_common)
-
-.pushsection .rodata.isr_table
-.balign 8
-.global x86_isr_table
-.type x86_isr_table, STT_OBJECT
-x86_isr_table:
-.popsection
 
 ISR_NOERRCODE 0
 ISR_NOERRCODE 1
@@ -111,10 +93,3 @@ ISR_NOERRCODE 28
 ISR_NOERRCODE 29
 ISR_NOERRCODE 30
 ISR_NOERRCODE 31
-
-.popsection
-
-.pushsection .rodata.isr_table
-.global x86_isr_table_end
-x86_isr_table_end:
-.popsection

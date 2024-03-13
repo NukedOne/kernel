@@ -8,6 +8,19 @@ uint64_t gdt[] = {
     0x00CFF2000000FFFF,    
 };
 
+struct gdt_ptr {
+    uint16_t limit;
+    uint32_t base;
+} __attribute__((packed));
+
+struct gdt_ptr gdt_ptr = {0};
+
+void gdt_init() {
+    gdt_ptr.base = &gdt;
+    gdt_ptr.limit = sizeof(gdt) - 1;
+    gdt_flush();
+}
+
 static uint64_t make_gdt_entry(
     uint64_t base_addr,
     uint64_t segment_limit,

@@ -61,4 +61,33 @@ void isr29(void);
 void isr30(void);
 void isr31(void);
 
+void isr_division_error(struct registers *regs);
+void isr_debug(struct registers *regs);
+void isr_non_maskable_interrupt(struct registers *regs);
+void isr_breakpoint(struct registers *regs);
+void isr_overflow(struct registers *regs);
+void isr_bound_range_exceeded(struct registers *regs);
+void isr_invalid_opcode(struct registers *regs);
+void isr_device_not_available(struct registers *regs);
+void isr_double_fault(struct registers *regs);
+void isr_coprocessor_segment_overrun(struct registers *regs);
+void isr_invalid_tss(struct registers *regs);
+void isr_segment_not_present(struct registers *regs);
+void isr_stack_segment_fault(struct registers *regs);
+void isr_general_protection_fault(struct registers *regs);
+void isr_page_fault(struct registers *regs);
+void isr_x87_floating_point_exception(struct registers *regs);
+void isr_alignment_check(struct registers *regs);
+void isr_machine_check(struct registers *regs);
+void isr_simd_floating_point_exception(struct registers *regs);
+void isr_virtualization_exception(struct registers *regs);
+void isr_control_protection_exception(struct registers *regs);
+void isr_hypervisor_injection_exception(struct registers *regs);
+void isr_vmm_communication_exception(struct registers *regs);
+void isr_security_exception(struct registers *regs);
+void isr_triple_fault(struct registers *regs);
+void isr_fpu_error_interrupt(struct registers *regs);
+
+void isr_dummy(struct registers *regs);
+
 #endif

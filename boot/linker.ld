@@ -18,4 +18,6 @@ SECTIONS {
     .bss : {
         *(.bss)
     }
+
+    /DISCARD/ : { *(*) }
 }

@@ -31,7 +31,8 @@ static uint64_t make_gdt_entry(
     uint64_t granularity
 );
 
-void gdt_load();
+void gdt_flush();
+void gdt_init();
 
 extern uint64_t gdt[5];
 
