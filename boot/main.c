@@ -14,7 +14,5 @@ void __attribute__((noreturn)) boot_main(struct multiboot_info *mb)
     idt_init();
     printf("idt: init\n");
 
-    asm (
-        "hlt"
-    );
+    printf("spam: %d\n", 1/0);
 }

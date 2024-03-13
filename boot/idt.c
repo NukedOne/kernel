@@ -1,5 +1,6 @@
 #include "idt.h"
 #include "print.h"
+#include "panic.h"
 
 struct idt_ptr idt_ptr = {0};
 struct idt_entry idt_entries[TOTAL_INTERRUPTS] = {0};
@@ -154,7 +155,7 @@ void isr_fpu_error_interrupt(struct registers *regs) { return; };
 void isr_dummy(struct registers *regs) { return; };
 
 void isr_invalid_opcode(struct registers *regs) {
-    printf("got: %s\n", exception_names[regs->int_no]);
+    panic(exception_names[regs->int_no]);
 }
 
 void dispatch_interrupt(struct registers *regs) {
